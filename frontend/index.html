@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>YouTube Transcript Summarizer</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1522199710521-72d69614c702'); /* Replace with your own URL if needed */
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      text-align: center;
+      width: 80%;
+      max-width: 700px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 32px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      background-color: #007BFF;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #title {
+      margin-top: 30px;
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #summary {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #555;
+      text-align: left;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>YouTube Transcript Summarizer</h1>
+    <input type="text" id="videoUrl" placeholder="Enter YouTube video URL" />
+    <button>Summarize</button>
+    <h2 id="title"></h2>
+    <p id="summary"></p>
+  </div>
+
+  <script>
+    document.querySelector("button").addEventListener("click", async () => {
+      const url = document.querySelector("input").value;
+
+      try {
+        const response = await fetch("http://127.0.0.1:5000/summarize", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ url })
+        });
+
+        const data = await response.json();
+
+        if (data.error) {
+          alert("Error: " + data.error);
+        } else {
+          document.getElementById("title").textContent = data.title;
+          document.getElementById("summary").textContent = data.summary;
+        }
+      } catch (err) {
+        alert("Failed to summarize: " + err.message);
+      }
+    });
+  </script>
+</body>
+</html>

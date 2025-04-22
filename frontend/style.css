@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url('https://images.unsplash.com/photo-1604014238161-3e7caa9b35a4');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  text-align: center;
+}
+
+h1 {
+  margin-top: 60px;
+  font-size: 2.5em;
+  text-shadow: 1px 1px 3px #000;
+}
+
+input, button {
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 20px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  background-color: #4e44ce;
+  color: white;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+button:hover {
+  background-color: #3a32a0;
+}
